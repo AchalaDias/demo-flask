@@ -1,5 +1,5 @@
 import os
-from flask import Flask, redirect, url_for, request, render_template
+from flask import Flask, redirect, url_for, request, render_template, jsonify
 from pymongo import MongoClient
 
 app = Flask(__name__)
@@ -15,7 +15,7 @@ def todo():
     _items = db.tododb.find()
     items = [item for item in _items]
     
-    return { items }, 200
+    return jsonify(items), 200
 
 
 @app.route('/new', methods=['POST'])
@@ -26,7 +26,7 @@ def new():
     }
     db.tododb.insert_one(item_doc)
 
-    return item_doc, 200
+    return jsonify(item_doc), 200
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
