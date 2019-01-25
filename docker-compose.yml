@@ -1,13 +1,12 @@
 version: '3'
 services:
   web:
-    container_name: api_server
     build: .
     command: python -u run.py
     ports:
       - 5000:5000
     volumes:
-      - .:/app
+      - .:/todo
     links:
       - datastore
   
