@@ -1,8 +1,9 @@
 version: '3'
 services:
   web:
+    container_name: falsk-mongo:1.0
     build: .
-    image: flask-mongo:1.0
+    command: python -u run.py
     ports:
       - 5000:5000
     volumes:
