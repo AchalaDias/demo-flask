@@ -1,8 +1,8 @@
 version: '3'
 services:
   web:
+    container_name: falsk_api
     build: .
-    command: python -u run.py
     ports:
       - 5000:5000
     volumes:
