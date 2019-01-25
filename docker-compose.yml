@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    container_name: falsk-mongo:1.0
+    container_name: api_server
     build: .
     command: python -u run.py
     ports:
