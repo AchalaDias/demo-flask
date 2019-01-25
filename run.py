@@ -5,8 +5,7 @@ from pymongo import MongoClient
 app = Flask(__name__)
 
 client = MongoClient(
-    'db',
-    27017)
+    'mongodb://datastore:27017/dockerdemo')
 db = client.tododb
 
 
