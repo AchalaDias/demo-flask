@@ -23,7 +23,7 @@ def todo():
 def new():
 
     item_doc = {
-        'name': request.form['name']
+        'name': request.json['name']
     }
     db.tododb.insert_one(item_doc)
 
