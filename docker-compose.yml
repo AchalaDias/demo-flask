@@ -1,7 +1,6 @@
 version: '3'
 services:
   web:
-    container_name: falsk_api
     build: .
     ports:
       - 5000:5000
