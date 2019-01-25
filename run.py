@@ -1,16 +1,33 @@
-from flask import Flask, request, jsonify
-from redis import Redis
+import os
+from flask import Flask, redirect, url_for, request, render_template
+from pymongo import MongoClient
 
 app = Flask(__name__)
-redis = Redis(host="redis", db=0, socket_timeout=5, charset="utf-8", decode_responses=True)
 
-@app.route('/', methods=['POST', 'GET'])
-def index():
+client = MongoClient(
+    os.environ['DB_PORT_27017_TCP_ADDR'],
+    27017)
+db = client.tododb
 
-    if request.method == 'POST':
-        # name = request.json['name']
-        # redis.rpush('students', {'name': str(name) })
-        return {'name': 'test'}, 200
 
-    if request.method == 'GET':
-        return jsonify(redis.lrange('students', 0, -1))
+@app.route('/')
+def todo():
+
+    _items = db.tododb.find()
+    items = [item for item in _items]
+    
+    return { items }, 200
+
+
+@app.route('/new', methods=['POST'])
+def new():
+
+    item_doc = {
+        'name': request.form['name']
+    }
+    db.tododb.insert_one(item_doc)
+
+    return redirect(url_for('todo'))
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', debug=True)
