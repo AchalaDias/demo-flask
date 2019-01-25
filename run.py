@@ -5,9 +5,9 @@ import os
 from redis import Redis
 from flask import Flask, request, jsonify
 
+redis = Redis(host="redis", db=0, socket_timeout=5, charset="utf-8", decode_responses=True)
 
 app = FlaskAPI(__name__)
-redis = Redis(host="redis", db=0, socket_timeout=5, charset="utf-8", decode_responses=True)
 CORS(app)
 
 
@@ -25,4 +25,10 @@ def index():
 
     if request.method == 'GET':
         return jsonify(redis.lrange('students', 0, -1))
+
+
+app.debug = True
+host = os.environ.get('IP', '0.0.0.0')
+port = int(os.environ.get('PORT', 5000))
+app.run(host=host, port=port)
 
