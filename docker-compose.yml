@@ -1,14 +1,15 @@
 version: '3'
-web:
-  build: .
-  command: python -u run.py
-  ports:
-    - "5000:5000"
-  volumes:
-    - .:/todo
-  links:
-    - datastore
-datastore:
-  image: mongo:3.0.2
-  ports:
-    - "27017:27017"
+services:
+  web:
+    build: .
+    command: python -u run.py
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/todo
+    links:
+      - datastore
+  datastore:
+    image: mongo:3.0.2
+    ports:
+      - "27017:27017"
