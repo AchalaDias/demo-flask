@@ -10,4 +10,4 @@ services:
       - 5000:5000
 
   redis:
-    image: redis:4.0.11-alpine
+    image: redis
