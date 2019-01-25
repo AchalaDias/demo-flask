@@ -15,7 +15,7 @@ def todo():
     _items = db.tododb.find()
     items = [item for item in _items]
     
-    return jsonify(items), 200
+    return str(items), 200
 
 
 @app.route('/new', methods=['POST'])
@@ -26,7 +26,7 @@ def new():
     }
     db.tododb.insert_one(item_doc)
 
-    return jsonify(item_doc), 200
+    return str(item_doc), 200
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
