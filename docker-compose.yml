@@ -2,6 +2,7 @@ version: '3'
 services:
   web:
     build: .
+    image: flask-mongo:1.0
     ports:
       - 5000:5000
     volumes:
