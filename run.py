@@ -9,7 +9,7 @@ def index():
 
     if request.method == 'POST':
         name = request.json['name']
-        redis.rpush('students', {'name': name})
+        redis.rpush('students', {'name': str(name) })
         return jsonify({'name': name})
 
     if request.method == 'GET':
