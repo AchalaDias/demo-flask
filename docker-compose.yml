@@ -1,6 +1,6 @@
 version: '3'
 services:
-  web:
+  flaskapp:
     build: .
     image: kube/flask-demo:1.0
     ports:
@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/app
   
-  datastore:
+  db:
     image: mongo:3.0.2
     ports:
       - 27017:27017
